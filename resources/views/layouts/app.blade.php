@@ -12,15 +12,22 @@
 
     <!-- Styles -->
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
+
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::to('css/main.css')}}">
     <link rel="stylesheet" href="{{ URL::to('font-awesome-4.7.0/css/font-awesome.min.css')}}">
-  
+
     <!-- Latest compiled and minified JavaScript -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -68,6 +75,16 @@
     </div>
 
     <!-- Scripts -->
-
+    <script>
+    $(document).ready(function() {
+      $('#example').DataTable( {
+        "columnDefs":[{
+          "targets": 'no-sort',
+          "orderable": true,
+        }],
+        "order": [[ 0, "desc" ]]
+      } );
+    } );
+    </script>
 </body>
 </html>

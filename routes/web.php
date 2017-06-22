@@ -16,7 +16,9 @@ Route::get('/', [  'uses' => 'HomeController@getLogin', 'as' =>'login']
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [
+  'uses' => 'HomeController@getDashboard', 'as' =>'dashboard'
+]);
 Route::get('/admin', 'AdminController@index');
 Route::get('/logout',[
   'uses' => 'HomeController@getLogout', 'as' =>'logout'
@@ -28,9 +30,8 @@ Route::get('/dashboard',[
 Route::post('/insert', [
   'uses' => 'HomeController@postInsert', 'as'=>'insert'
 ]);
-Route::get('/delete-doc/{doc_id}',[
-  'uses'=>'HomeController@getDeleteDoc', 'as' =>'doc.delete',
-  'middleware' => 'auth'
+Route::post('/delete-doc}',[
+  'uses'=>'HomeController@postDeleteDoc', 'as' =>'doc.delete'
 ]);
 Route::post('/edit', [
   'uses' => 'HomeController@postEditDoc', 'as'=>'edit'
