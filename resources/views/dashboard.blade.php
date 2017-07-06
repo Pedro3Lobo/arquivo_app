@@ -12,16 +12,16 @@
       <div class="panel-body">
         <div class='row-fluid'>
           <div id="postBody"></div>
-              <table id="example" class='table table-bordered table-striped' class="display" cellspacing="0" width="100%">
+              <table id="example" class=' table-bordered table-striped' class="display" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> N.º</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> DATA</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> TIPO DOC.</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> ASSUNTO</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> DESTINATÁRIO</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> DEP.</th>
-                    <th><i class='fa fa-sort' aria-hidden='true' style='color:#3c8dbc;'></i> UTILIZADOR</th>
+                    <th>N.º</th>
+                    <th>DATA</th>
+                    <th>TIPO DOC.</th>
+                    <th>ASSUNTO</th>
+                    <th>DESTINATÁRIO</th>
+                    <th>DEP.</th>
+                    <th>UTILIZADOR</th>
                     <th>OPÇÕES</th>
                   </tr>
                 </thead>
@@ -41,13 +41,13 @@
                     <a href="#" type='button' class='btn btn-danger btn-xs' onclick="apagar(this)" name="{{$docs->id}}"><span><i class='fa fa-trash' aria-hidden='true'></i></span></a></td>
                    </tr>
 
-                   <input type="hidden" id="id_doc" value="{{$docs->id}}" >
-                   <input type="hidden" id="data_doc{{$docs->id}}" value="{{$docs->data}}" >
-                   <input type="hidden" id="type_doc_1{{$docs->id}}" value="{{$docs->id_tipo_doc}}" >
-                   <input type="hidden" id="assunto_doc{{$docs->id}}"  value="{{$docs->assunto}}" >
-                   <input type="hidden" id="receiver_doc{{$docs->id}}"  value="{{$docs->receiver}}" >
-                   <input type="hidden" id="abbreviation_doc{{$docs->id}}"  value="{{$docs->id_departamento}}" >
-                   <input type="hidden" id="user_doc{{$docs->id}}"  value="{{$docs->id_user}}" >
+                   <input type="text" id="id_doc" value="{{$docs->id}}"  style="display: none">
+                   <input type="text" id="data_doc{{$docs->id}}" value="{{$docs->data}}"  style="display: none">
+                   <input type="text" id="type_doc_1{{$docs->id}}" value="{{$docs->id_tipo_doc}}"  style="display: none">
+                   <input type="text" id="assunto_doc{{$docs->id}}"  value="{{$docs->assunto}}"  style="display: none">
+                   <input type="text" id="receiver_doc{{$docs->id}}"  value="{{$docs->receiver}}"  style="display: none">
+                   <input type="text" id="abbreviation_doc{{$docs->id}}"  value="{{$docs->id_departamento}}"  style="display: none">
+                   <input type="text" id="user_doc{{$docs->id}}"  value="{{$docs->id_user}}"  style="display: none">
 
                  @endforeach
                </tbody>
@@ -302,7 +302,27 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="apagar_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="{{route('doc.delete')}}" method="POST">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Apagar Documento</h4>
+        </div>
+        <div class="modal-body">
+          <p>Tem a certesa que quer apagar este Documento???</p>
+          <input  id="apagar_doc" name="apaga_doc"  style="display: none">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input type="hidden" name="_token"  value="{{ csrf_token() }}" >
+          <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Apagar</button>
+        </div>
+    </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <script  type="text/javascript">
@@ -394,7 +414,7 @@
   function apagar(vari) {
        event.preventDefault();
        $("#apagar_modal").modal();
-       document.getElementById('id_doc_apagar').value=vari.name;
+       document.getElementById('apagar_doc').value=vari.name;
   }
 
   function edit_func(elem) {

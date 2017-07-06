@@ -86,7 +86,7 @@ class HomeController extends Controller
       return redirect()->route('dashboard')->with(['message'=>'O documento foi Inserido com sucesso!']);;
     }
     public function postDeleteDoc(Request $request){
-      $id_doc_apagar=$request["id_doc_apagar"];
+      $id_doc_apagar=$request["apaga_doc"];
       DB::table('documents')->where('id', '=',$id_doc_apagar)->delete();
 
       return redirect()->route('dashboard')->with(['message'=>' O documento foi Apagado com sucesso!']);

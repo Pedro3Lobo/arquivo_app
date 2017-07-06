@@ -54,8 +54,8 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             @else
                                   <li>
-                                     <a href="{{route('dashboard')}}" class="dropdown-toggle"  role="button" aria-expanded="false">
-                                       Documentos
+                                     <a href="{{route('admin_menu')}}" class="dropdown-toggle"  role="button" aria-expanded="false">
+                                       Menu
                                      </a>
                                   </li>
                                   <li class="dropdown">
