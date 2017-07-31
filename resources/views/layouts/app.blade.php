@@ -12,7 +12,8 @@
 
     <!-- Styles -->
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
 
 
 
@@ -38,6 +39,7 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">
           <span class="logo-mini"><font size="6"><p><i class="fa fa-archive" aria-hidden="true"></i> Arquivo Digital de Documentação &nbsp;&nbsp;</p></font></span>
+
         </a>
       </div>
 
@@ -68,7 +70,8 @@
 
                                       <ul class="dropdown-menu" role="menu">
                                           <li>
-                                              <a href="{{route('logout')}}">Logout</a>
+                                              <a id="logout" href="{{route('logout')}}">Logout</a>
+                                               <input type="text" id="ativo"  value="{{ Auth::user()->ativo}}"  style="display: none">
                                           </li>
                                       </ul>
                                   </li>
@@ -76,19 +79,39 @@
                         </a>
          </div>
        </div>
+       <script>
+         var ativo=document.getElementById('ativo').value;
+         if(ativo==0){
+           //document.getElementById('logout').click();
+           location.href = "{{route('logout')}}";
+         }
+       </script>
      </nav>
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script>
+  //  var ativo=document.getElementById('ativo').value;
+    //if(ativo==1){
+      //document.getElementById('logout').click();
+    //  location.href = "{{route('logout')}}";
+    //}
     $(document).ready(function() {
       $('#example').DataTable( {
         "columnDefs":[{
           "targets": 'no-sort',
           "orderable": true,
         }],
-        "order": [[ 0, "desc" ]]
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registos por página",
+            "zeroRecords": "Nada encontrado - sorry",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": " Nenhum registo acessível ",
+            "infoFiltered": "(Filtrado de _MAX_ registos totais)"
+        },
+        "order": [[ 0, "desc" ]],
+         "pageLength": 100
       } );
     } );
     </script>

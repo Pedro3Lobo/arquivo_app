@@ -188,28 +188,17 @@
          document.getElementById('id_type_doc').value=elem.name;
    }
 
-   function type_edi_submit(elem) {
-      if(document.getElementById('type_doc_edit').value==null){
-        alert("validation failed false");
-        returnToPreviousPage();
-        return false;
-      }
-      return true;
-      document.getElementById("type_form_edi").submit();
-      document.getElementById("btn_type_edit").disabled = true;
-    }
-
     function type_inser_submit(elem) {
-      console.log("Pedro");
-      if(document.getElementById('type_doc_inser').value==null){
-        returnToPreviousPage();
-        return false;
+      name=document.getElementById('type_doc_inser').value;
+      console.log("Pedro"+name);
+      name=name.replace(/\s/g,'');
+      if(name==""){
         console.log("Falhou");
-      }
-      return true;
-      document.getElementById("type_form_inser").submit();
-      document.getElementById("btn_type_inser").style.display = 'none';
+      }else{
+        document.getElementById("type_form_inser").submit();
         console.log("Flag1");
+        document.getElementById("btn_type_inser").style.display = 'none';
+      }
      }
 
 </script>

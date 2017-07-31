@@ -40,35 +40,39 @@ class AdminController extends Controller
 
         public function postUser_Inser(Request $request){
               $this->validate($request,[
-                'nome_user' => 'required',
-                'email_user' => 'required',
+                'name' => 'required|unique:users',
+                'email' => 'required|unique:users',
                 'password_user' => 'required',
                 'password_new_user' => 'required',
                 'departamento_user' => 'required'
               ]);
 
-              $name = $request["nome_user"];
-              $email = $request["email_user"];
+              $name = $request["name"];
+              $email = $request["email"];
               $password = $request["password_user"];
               $repassword = $request["password_new_user"];
               $ativo ="0";
               $id_departamento =$request["departamento_user"];
-              if($password==$repassword){
-                $password=bcrypt($password);
-                DB::table('users')->insert([
-                    ['name'=>$name,
-                    'email'=>$email,
-                    'password'=>$password,
-                    'id_department'=>$id_departamento,
-                    'ativo'=>$ativo
-                    ]
-                ]);
 
-                return redirect()->route('user_table')->with(['message'=>'O User foi Inserido com sucesso!']);
-              }else{
-                return redirect()->route('user_table')->with(['error'=>'As Passwords eram diferentes!']);
+
+
+                  if($password==$repassword){
+                    $password=bcrypt($password);
+                    DB::table('users')->insert([
+                        ['name'=>$name,
+                        'email'=>$email,
+                        'password'=>$password,
+                        'id_department'=>$id_departamento,
+                        'ativo'=>$ativo
+                        ]
+                    ]);
+                    return redirect()->route('user_table')->with(['message'=>'O User foi Inserido com sucesso!']);
+                  }else{
+                    return redirect()->route('user_table')->with(['error'=>'As Passwords eram diferentes!']);
+                  }
+
+
               }
-          }
           public function postAdmin_Depart_Insert(Request $request){
 
               $this->validate($request,[

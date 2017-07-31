@@ -25,6 +25,7 @@
               </thead>
               <tbody>
                 <form>
+
                   @foreach($user as $users)
                    <tr>
                       <td style='min-width: 50px; text-align: center;'>{{$users->id}}</td>
@@ -46,6 +47,7 @@
                    <input  id="department_user{{$users->id}}" value="{{$users->id_department}}"  style="display: none">
                    <input  id="password_user{{$users->id}}" value="{{$users->password}}"  style="display: none">
                    <input  id="ativo_user{{$users->id}}" value="{{$users->ativo}}"  style="display: none">
+                   <input  id="id__user{{$users->id}}" value="{{$users->id}}"  style="display: none">
                  @endforeach
                </form>
                </tbody>
@@ -75,22 +77,22 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><i class='fa fa-arrow-circle-o-right'></i><b> Inserir Utilizador </b></h4>
       </div>
-      <form class="form-group" action="{{route('admin_inser')}}" method="post">
+      <form class="form-group" action="{{route('admin_inser')}}" id="user_form_inser" method="post">
         <div class="modal-body">
             <div class="form-group">
               <div class='form-group has-feedback'>
                 <label>Utilizador:</label><br>
-                <input type='text' class='form-control'  required='required' name='nome_user' placeholder='Utilizador: 'required='required'>
+                <input type='text' class='form-control'  required='required' name='name' id='nome_user' placeholder='Utilizador: 'required='required'>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
               <div class='form-group has-feedback'>
                 <label>Email:</label><br>
-                <input type='email' class='form-control'  required='required' name='email_user' placeholder='Email: 'required='required'>
+                <input type='email' class='form-control'  required='required' name='email' id='email_user' placeholder='Email: 'required='required'>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
               <div class='form-group has-feedback'>
                 <label>Departamento:</label><br>
-                <select name='departamento_user'  class='btn btn-default dropdown-toggle' required='required'  style='text-align:left!important; width:270px!important;'>
+                <select name='departamento_user'id='departamento_user' class='btn btn-default dropdown-toggle' required='required'  style='text-align:left!important; width:270px!important;'>
                   @foreach($dep as $deps)
                   <option value="{{$deps->id}}">{{ $deps->name}}</option>
                   @endforeach
@@ -100,13 +102,13 @@
 
                <div class='form-group has-feedback'>
                  <label>Palavra Passe:</label><br>
-                 <input type='password' class='form-control'  required='required' name='password_user' placeholder='Palavra Passe:'required='required'>
+                 <input type='password' class='form-control'  required='required' name='password_user' id='password_user' placeholder='Palavra Passe:'required='required'>
                  <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
                </div>
 
                <div class='form-group has-feedback'>
                  <label>Confirmação:</label><br>
-                 <input type='password' class='form-control' required='required' name ="password_new_user"placeholder='Palavra Passe:' required='required'>
+                 <input type='password' class='form-control' required='required' name ="password_new_user" id="password_new_user" placeholder='Palavra Passe:' required='required'>
                  <span class='glyphicon glyphicon-user form-control-feedback' ></span>
                </div>
         	    <br>
@@ -115,7 +117,7 @@
         <div class="modal-footer">
           <input type="hidden" name="id" id="_user" value="" >
           <input type="hidden" name="_token"  value="{{ csrf_token() }}" >
-          <button type="submit"class="btn btn-primary" ><i class="fa fa-check" aria-hidden="true"></i> Confirmar</button>
+          <button type="button"class="btn btn-primary" id="user_btn_inser" onclick="user_inser_submit(this)"><i class="fa fa-check" aria-hidden="true"></i> Confirmar</button>
           <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Fechar</button>
         </div>
       </form>
@@ -199,12 +201,12 @@
             <div class="form-group">
               <div class='form-group has-feedback'>
                 <label>Ver Utilizador:</label><br>
-                <input type='text' class='form-control'  required='required'id='nome' name='nome' placeholder='Utilizador: 'required='required' disabled>
+                <input type='text' class='form-control'  required='required'id='nome'  placeholder='Utilizador: 'required='required' disabled>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
               <div class='form-group has-feedback'>
                 <label>Email:</label><br>
-                <input type='email' class='form-control'  required='required'id='email' name='email' placeholder='Email: 'required='required' disabled>
+                <input type='email' class='form-control'  required='required'id='email'  placeholder='Email: 'required='required' disabled>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
               <div class='form-group has-feedback'>
@@ -350,6 +352,64 @@
          document.getElementById('ativo_edi').value=var1
          document.getElementById('ativo_edi1').value=var1;
    }
+   function user_inser_submit(elem) {
+       console.log("Flag");
+       var new_var=1;
+       var new_var1=0;
+       var new_var2=0;
+       var while_=null;
+       var name2=null;
+       name=document.getElementById('nome_user').value
+
+        /*console.log("while_:"+while_+"name"+name );
+        console.log("while_:"+while_+"new_var"+new_var );
+
+        while(while_==""){
+          new_var2=new_var2+1;
+          while_=document.getElementById("id__user"+new_var2).value
+          console.log("while_"+while_+"new_var2"+new_var2 );
+        }
+       while(new_var==while_){
+
+         name2=document.getElementById('name_user'+new_var).value
+         console.log("name"+name+"name2"+name2 );
+         if(name==name2){
+           new_var1++;
+           console.log("Number:"+new_var1+"Nome:"+name2);
+         }
+         new_var++;
+       }*/
+       email=document.getElementById('email_user').value
+       depart=document.getElementById('departamento_user').value
+       palavra_passe=document.getElementById('password_user').value
+       new_palavra_passe=document.getElementById('password_new_user').value
+       name=name.replace(/\s/g,'')
+       email=email.replace(/\s/g,'')
+       depart=depart.replace(/\s/g,'')
+       palavra_passe=palavra_passe.replace(/\s/g,'');
+       new_palavra_passe=new_palavra_passe.replace(/\s/g,'');
+       new_var++;
+
+       if(new_var1==0){
+         if(name==""){
+            console.log("Flag1"+name);
+         }else if(depart==""){
+            console.log("Flag2"+depart);
+          }else if(email==""){
+            console.log("Flag3"+email);
+          }else if(palavra_passe==""){
+            console.log("Flag4"+palavra_passe);
+          }else if(new_palavra_passe==""){
+            console.log("Flag4"+palavra_passe);
+          }else{
+            console.log("pedro");
+            console.log("Flag3"+email);
+            document.getElementById("user_form_inser").submit();
+            document.getElementById("user_btn_inser").style.display = 'none';
+          }
+        }
+    }
+
 
 </script>
 @stop

@@ -18,7 +18,9 @@ Route::prefix('admin')->group(function(){
   Route::get('/', 'AdminController@index');
 });
 Route::get('/admin_menu', 'AdminController@getAdminMenu')->name('admin_menu');
+
 Auth::routes();
+
 Route::post('/admin_inser', [
   'uses' => 'AdminController@postUser_Inser', 'as'=>'admin_inser'
 ]);

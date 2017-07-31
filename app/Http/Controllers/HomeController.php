@@ -36,6 +36,8 @@ class HomeController extends Controller
       return redirect()->route('login');
     }
     public function getDashboard(){
+    //  $eunaosei="".Auth::user()->name;
+    //  if($eunaosei=="User 1"){
       $doc=DB::table('documents')
             ->join('users', 'users.id', '=', 'documents.id_user')
             ->join('type_docs', 'type_docs.id', '=', 'documents.id_tipo_doc')
@@ -45,13 +47,40 @@ class HomeController extends Controller
       $user=DB::table('users')
       ->select('users.*')
       ->get();
+      $type=DB::table('type_docs')
+      ->select('type_docs.*')
+      ->get();
+      $departments=DB::table('departments')
+      ->select('departments.*')
+      ->get();
 
             //$doc = Document::all();
-      return view('dashboard',['doc'=>$doc],['user'=>$user]);
+    return view('dashboard',['doc'=>$doc,'user'=>$user,'type'=>$type,'department'=>$departments]);
+  //  }else{
+    //  return redirect()->route('logout');
+  //  }
     }
     public function getLogin(){
 
       return redirect()->route('login');
+    }
+    public function login(Request $request)
+    {
+
+      // Validate the form data
+      $this->validate($request, [
+        'email_p'   => 'required|email',
+        'password' => 'required|email'
+      ]);
+
+      // Attempt to log the user in
+      if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        // if successful, then redirect to their intended location
+        return redirect()->intended(route('dashboard'));
+      }
+
+      // if unsuccessful, then redirect back to the login with the form data
+      return redirect()->back()->withInput($request->only('email', 'remember'));
     }
     public function postInsert(Request $request){
       //Validation

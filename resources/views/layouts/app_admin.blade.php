@@ -12,8 +12,8 @@
 
     <!-- Styles -->
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>
-
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.15/datatables.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -84,15 +84,35 @@
 
     <!-- Scripts -->
     <script>
-    $(document).ready(function() {
+  /*  $(document).ready(function() {
       $('#example').DataTable( {
         "columnDefs":[{
           "targets": 'no-sort',
           "orderable": true,
         }],
+
         "order": [[ 0, "desc" ]]
       } );
+    } );*/
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registos por página",
+            "zeroRecords": "Nada encontrado - sorry",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registo acessível",
+            "infoFiltered": "(Filtrado apartir _MAX_ total de registo)",
+            "search": "Procurar"
+        }
     } );
+} );
+/*
+"lengthMenu": "Mostrar _MENU_ registos por página",
+"zeroRecords": "Nada encontrado - sorry",
+"info": "Mostrando pagina _PAGE_ de _PAGES_",
+"infoEmpty": " Nenhum registo acessível ",
+"infoFiltered": "(Filtrado de _MAX_ registos totais)"
+*/
     </script>
 </body>
 </html>

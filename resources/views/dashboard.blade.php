@@ -54,7 +54,7 @@
             </table>
           </div>
           <div class=''>
-            <a href='#' data-toggle="modal" data-target="#myModal"  class='btn btn-success date_doc'>
+            <a href='#' data-toggle="modal" data-target="#myModal" onclick="ins(this)" id="{{Auth::user()->id}}" class='btn btn-success date_doc'>
               <i class='fa fa-plus'></i> Novo Documento
             </a>
           </div>
@@ -81,7 +81,7 @@
             <div class="form-group">
               <div class='form-group has-feedback'>
                 <label>Utilizador:</label><br>
-                <select name='utilizador' class='btn btn-default dropdown-toggle' value="{{ Auth::user()->id }}"  style='text-align:left!important;' required>
+                <select name='utilizador' class='btn btn-default dropdown-toggle' id='utilizador_j'  style='text-align:left!important;' required>
                     @foreach($user as $users)
                       <option value="{{$users->id}}">{{$users->name}}</option>
                     @endforeach
@@ -91,30 +91,18 @@
                 <label>Departamento:</label><br>
                 <select name='departamento'  class='btn btn-default dropdown-toggle' required='required' id="depart"  style='text-align:left!important; width:270px!important;' required>
     		            <option selected disabled value="">-Selecione o Departamento -</option>";
-                    <option value="1">Diretor de Serviços</option>
-                    <option value="2">Divisão de Apoio à Educação Artística</option>
-                    <option value="3">Divisão de Expressões Artísticas</option>
-                    <option value="4">Divisão de Investigação e Multimédia</option>
-                    <option value="5">Secção Administrativa</option>
-                    <option value="6">Sistema de Gestão</option>
-                    <option value="7">Área de Informática</option>
-                    <option value="8">Produção</option>
-                    <option value="9">Comunicação, Imagem e Vídeo</option>
-                    <option value="10">Equipa de Animação</option>
-                    <option value="11">Centro Multimédia</option>
+                    @foreach($department as $departments)
+                      <option value="{{$departments->id}}">{{$departments->name}}</option>
+                    @endforeach
                 </select>
               </div>
               <div class='form-group has-feedback'>
                 <label>Tipo de Documento:</label><br>
                 <select  class='btn btn-default dropdown-toggle' required='required' name="type_doc" style='text-align:left!important;' required>
                     <option selected disabled value="">-Selecione o Tipo de Documento-</option>
-                    <option value='1'> Certificado </option>
-                    <option value='2'> Declaração </option>
-                    <option value='3'> Informação Interna </option>
-                    <option value='4'> Nota Interna </option>
-                    <option value='5'> Ofício Circular </option>
-                    <option value='6'> Press Release </option>
-                    <option value='7'> Fax </option>
+                    @foreach($type as $types)
+                      <option value="{{$types->id}}">{{$types->type}}</option>
+                    @endforeach
                 </select>
               </div>
               <div class='form-group has-feedback' style='width:270px!important;'>
@@ -170,29 +158,17 @@
               <div class='form-group has-feedback'>
                 <label>Departamento:</label><br>
                 <select name='departamento_edi'  class='btn btn-default dropdown-toggle' required='required' id="depart_edi" style='text-align:left!important; width:270px!important;'>
-                    <option value="1">Diretor de Serviços</option>
-                    <option value="2">Divisão de Apoio à Educação Artística</option>
-                    <option value="3">Divisão de Expressões Artísticas</option>
-                    <option value="4">Divisão de Investigação e Multimédia</option>
-                    <option value="5">Secção Administrativa</option>
-                    <option value="6">Sistema de Gestão</option>
-                    <option value="7">Área de Informática</option>
-                    <option value="8">Produção</option>
-                    <option value="9">Comunicação, Imagem e Vídeo</option>
-                    <option value="10">Equipa de Animação</option>
-                    <option value="11">Centro Multimédia</option>
+                  @foreach($department as $departments)
+                    <option value="{{$departments->id}}">{{$departments->name}}</option>
+                  @endforeach
                 </select>
               </div>
               <div class='form-group has-feedback'>
                 <label>Tipo de Documento:</label><br>
                 <select  class='btn btn-default dropdown-toggle' required='required' name="type_doc_edi" id="type_doc_edi" style='text-align:left!important;'>
-                    <option value='1'> Certificado </option>
-                    <option value='2'> Declaração </option>
-                    <option value='3'> Informação Interna </option>
-                    <option value='4'> Nota Interna </option>
-                    <option value='5'> Ofício Circular </option>
-                    <option value='6'> Press Release </option>
-                    <option value='7'> Fax </option>
+                  @foreach($type as $types)
+                    <option value="{{$types->id}}">{{$types->type}}</option>
+                  @endforeach
                 </select>
               </div>
               <div class='form-group has-feedback' style='width:270px!important;'>
@@ -250,30 +226,19 @@
                 <label>Departamento:</label><br>
                 <select name='departamento'  class='btn btn-default dropdown-toggle' required='required' id="depart_ver" style='text-align:left!important; width:270px!important;' disabled>
     		            <option>-Selecione o Departamento -</option>";
-                    <option value="1">Diretor de Serviços</option>
-                    <option value="2">Divisão de Apoio à Educação Artística</option>
-                    <option value="3">Divisão de Expressões Artísticas</option>
-                    <option value="4">Divisão de Investigação e Multimédia</option>
-                    <option value="5">Secção Administrativa</option>
-                    <option value="6">Sistema de Gestão</option>
-                    <option value="7">Área de Informática</option>
-                    <option value="8">Produção</option>
-                    <option value="9">Comunicação, Imagem e Vídeo</option>
-                    <option value="10">Equipa de Animação</option>
-                    <option value="11">Centro Multimédia</option>
+                    @foreach($department as $departments)
+                      <option value="{{$departments->id}}">{{$departments->name}}</option>
+                    @endforeach
                 </select>
               </div>
               <div class='form-group has-feedback'>
                 <label>Tipo de Documento:</label><br>
                 <select name='num_utilizador' class='btn btn-default dropdown-toggle' required='required' id="type_doc_ver" style='text-align:left!important;' disabled>
                     <option>-Selecione o Tipo de Documento-</option>
-                    <option value='1'>-Certificado-</option>
-                    <option value='2'>-Declaração-</option>
-                    <option value='3'>-Informação Interna-</option>
-                    <option value='4'>-Nota Interna-</option>
-                    <option value='5'>-Ofício Circular-</option>
-                    <option value='6'>-Press Release-</option>
-                    <option value='7'>-Fax-</option>
+                    @foreach($type as $types)
+                      <option value="{{$types->id}}">{{$types->type}}{{$types->id}}</option>
+                    @endforeach
+
                 </select>
               </div>
               <div class='form-group has-feedback' style='width:270px!important;'>
@@ -350,7 +315,7 @@
     var ano = data.getFullYear();
 
     document.getElementById('date').value= ano+"-"+mes+"-"+dia;
-    console.log(''+currentdate);
+
   });
   $('.modelInser').on('click', function(event) {
 
@@ -445,6 +410,11 @@
           document.getElementById('type_doc_edi').value=tipo_doc_edi;
           document.getElementById('assunto_edi').value=assunto_edi;
    }
+   function ins(elem) {
+          event.preventDefault();
+          console.log("flag1:"+elem.id);
+          document.getElementById('utilizador_j').value=elem.id;
+  }
 
 </script>
 

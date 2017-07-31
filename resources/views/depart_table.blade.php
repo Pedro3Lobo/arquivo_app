@@ -69,19 +69,19 @@
             <div class="form-group">
               <div class='form-group has-feedback'>
                 <label>Nome do Departamento: </label><br>
-                <input type='text' class='form-control'  required='required' name='nome_depart' placeholder='Nome do Departamento: 'required='required'>
+                <input type='text' class='form-control'  required='required' name='nome_depart' id="nome_depart"placeholder='Nome do Departamento: 'required='required'>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
               <div class='form-group has-feedback'>
                 <label>Abreviatura do Departamento</label><br>
-                <input type='text' class='form-control'  required='required' name='abrevia_depart' placeholder='Abreviatura do Departamento: 'required='required'>
+                <input type='text' class='form-control'  required='required' name='abrevia_depart' id="abrevia_depart" placeholder='Abreviatura do Departamento: 'required='required'>
                 <span class='glyphicon glyphicon-comment form-control-feedback' ></span>
               </div>
             </div>
         <div class="modal-footer">
           <input type="hidden" name="id" id="_user" value="" >
           <input type="hidden" name="_token"  value="{{ csrf_token() }}" >
-          <button type="submit" onclick="depart_inser_submit(this)" class="btn btn-primary" onclick="depart_inser_submit(this)" ><i class="fa fa-check" aria-hidden="true"></i> Confirmar</button>
+          <button type="button" onclick="depart_inser_submit(this)" class="btn btn-primary" id="depart_btn_inser" onclick="depart_inser_submit(this)" ><i class="fa fa-check" aria-hidden="true"></i> Confirmar</button>
           <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Fechar</button>
         </div>
       </form>
@@ -211,33 +211,19 @@
          document.getElementById('edi_abrevia_depart').value=abreviation;
          document.getElementById('id_depart').value=elem.name;
    }
-   function depart_edi_submit(elem) {
-      abreviation=document.getElementById('edi_abrevia_depart').value;
-      if(document.getElementById('edi_nome_depart').value==null){
-        alert("validation failed false");
-        returnToPreviousPage();
-        return false;
-      }
-      if(document.getElementById('edi_abrevia_depart').value==null){
-        alert("validation failed false");
-        returnToPreviousPage();
-        return false;
-      }
-      return true;
-      document.getElementById("edi_form_depart").submit();
-    }
 
     function depart_inser_submit(elem) {
-       if(document.getElementById('nome_depart').value==null){
-         returnToPreviousPage();
-         return false;
-       }
-       if(document.getElementById('abrevia_depart').value==null){
-         returnToPreviousPage();
-         return false;
-       }
-       return true;
+      console.log("Flag");
+      name=document.getElementById('nome_depart').value;
+      abreviation=document.getElementById('abrevia_depart').value;
+       if(name==""){
+        console.log("Flag1"+name);
+      }else if(abreviation==""){
+         console.log("Flag2"+abreviation);
+       }else{
        document.getElementById("depart_form_inser").submit();
+       document.getElementById("depart_btn_inser").style.display = 'none';
+      }
      }
 
 </script>
